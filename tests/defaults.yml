@@ -1,0 +1,9 @@
+---
+classes:
+  - ..component
+  - ..main
+
+parameters:
+  pkg.appuio_reporting_aldebaran:
+    prometheus:
+      url: foo
