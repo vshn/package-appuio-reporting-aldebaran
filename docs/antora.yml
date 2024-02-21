@@ -1,0 +1,6 @@
+name: package-appuio-reporting-aldebaran
+title: appuio-reporting-aldebaran
+version: master
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/partials/nav.adoc

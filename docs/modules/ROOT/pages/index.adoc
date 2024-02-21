@@ -1,0 +1,3 @@
+= appuio-reporting-aldebaran
+
+appuio-reporting-aldebaran is a Commodore configuration package to manage appuio-reporting-aldebaran.

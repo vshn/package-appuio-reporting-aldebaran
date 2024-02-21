@@ -1,0 +1,20 @@
+{
+  "template": "https://github.com/projectsyn/commodore-config-package-template.git",
+  "commit": "2882a1bcf5c6a0640d81856c1bc48d6e0e9c0145",
+  "checkout": "main",
+  "context": {
+    "cookiecutter": {
+      "name": "appuio-reporting-aldebaran",
+      "slug": "appuio-reporting-aldebaran",
+      "test_cases": "defaults",
+      "add_golden": "y",
+      "copyright_holder": "VSHN AG <info@vshn.ch>",
+      "copyright_year": "2024",
+      "github_owner": "vshn",
+      "__github_name": "package-appuio-reporting-aldebaran",
+      "__github_url": "https://github.com/vshn/package-appuio-reporting-aldebaran",
+      "_template": "https://github.com/projectsyn/commodore-config-package-template.git"
+    }
+  },
+  "directory": null
+}
