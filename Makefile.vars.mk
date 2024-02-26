@@ -32,6 +32,10 @@ VALE_ARGS ?= --minAlertLevel=error --config=/pages/ROOT/pages/.vale.ini /pages
 
 ANTORA_PREVIEW_CMD ?= $(DOCKER_CMD) run --rm --publish 35729:35729 --publish 2020:2020 $(antora_git_volume) --volume "${PWD}/docs":/preview/antora/docs ghcr.io/vshn/antora-preview:3.1.2.3 --style=syn --antora=docs
 
+QUERY_TEST_INCLUDE_FILES ?= main.yml
+
+QUERY_TEST_CMD ?= $(DOCKER_CMD) run --rm --mount src="$${PWD}",target=/tests,type=bind ghcr.io/appuio/promtool-jsonnet:latest --add-yaml-file /tests/$(QUERY_TEST_INCLUDE_FILES) --test-file
+
 
 COMMODORE_CMD  ?= $(DOCKER_CMD) $(DOCKER_ARGS) $(root_volume) docker.io/projectsyn/commodore:latest
 COMPILE_CMD    ?= $(COMMODORE_CMD) package compile . $(commodore_args)
