@@ -38,8 +38,13 @@ docs-serve: ## Preview the documentation
 	mkdir -p dependencies
 	$(COMPILE_CMD)
 
+.PHONY: query_test
+query_test: querytests/*
+	@for f in $^ ; do $(QUERY_TEST_CMD) /tests/$${f} ; done
+
 .PHONY: test
-test: .compile ## Compile the package
+test: .compile query_test ## Compile the package and run query tests
+
 .PHONY: gen-golden
 gen-golden: clean .compile ## Update the reference version for target `golden-diff`.
 	@rm -rf tests/golden/$(instance)
