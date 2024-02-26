@@ -15,6 +15,16 @@ parameters:
       org_id: null
 
   appuio_reporting_aldebaran:
+    network_policies:
+      target_namespaces:
+        vshn-appuio-mimir: true
+    namespaceMetadata:
+      annotations:
+        # We have 101 cron jobs 🙃
+        resourcequota.appuio.io/organization-objects.count_jobs.batch: '500'
+        resourcequota.appuio.io/organization-compute-terminating.pods: "10"
+        resourcequota.appuio.io/organization-compute-terminating.limits.cpu: "8"
+        resourcequota.appuio.io/organization-compute-terminating.limits.memory: 10Gi
     prometheus: ${pkg.appuio_reporting_aldebaran:prometheus}
     odoo: ${pkg.appuio_reporting_aldebaran:odoo}
     cluster_id_to_name_map:
@@ -567,7 +577,9 @@ parameters:
         item_group_description_pattern: 'APPUiO Managed - Cluster: %(cluster_id)s' # TODO
         unit_id: "uom_uom_191_55730e52" #Node-Hour
         query_pattern: |
-          max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+          max_over_time(
+            count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+          [59m:1m])
           # Pull in the APPUiO managed info labels
           * on(cluster_id) group_left(sales_order) appuio_managed_info{
               distribution!="rke2",

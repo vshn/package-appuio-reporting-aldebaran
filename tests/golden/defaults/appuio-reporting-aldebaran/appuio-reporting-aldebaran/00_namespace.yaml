@@ -1,7 +1,11 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  annotations: {}
+  annotations:
+    resourcequota.appuio.io/organization-compute-terminating.limits.cpu: '8'
+    resourcequota.appuio.io/organization-compute-terminating.limits.memory: 10Gi
+    resourcequota.appuio.io/organization-compute-terminating.pods: '10'
+    resourcequota.appuio.io/organization-objects.count_jobs.batch: '500'
   labels:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting

@@ -15726,7 +15726,9 @@ spec:
                   value: kubernetes-hyperscaler-node-premium
                 - name: AR_QUERY
                   value: |
-                    max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+                    max_over_time(
+                      count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+                    [59m:1m])
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         distribution!="rke2",
@@ -15819,7 +15821,9 @@ spec:
                   value: kubernetes-hyperscaler-node-professional
                 - name: AR_QUERY
                   value: |
-                    max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+                    max_over_time(
+                      count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+                    [59m:1m])
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         distribution!="rke2",
@@ -15912,7 +15916,9 @@ spec:
                   value: kubernetes-hyperscaler-node-standard
                 - name: AR_QUERY
                   value: |
-                    max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+                    max_over_time(
+                      count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+                    [59m:1m])
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         distribution!="rke2",
@@ -16005,7 +16011,9 @@ spec:
                   value: kubernetes-hyperscaler-node-zero
                 - name: AR_QUERY
                   value: |
-                    max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+                    max_over_time(
+                      count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+                    [59m:1m])
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         distribution!="rke2",
@@ -16098,7 +16106,9 @@ spec:
                   value: kubernetes-hyperscaler-node-premium
                 - name: AR_QUERY
                   value: |
-                    max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+                    max_over_time(
+                      count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+                    [59m:1m])
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         distribution!="rke2",
@@ -16191,7 +16201,9 @@ spec:
                   value: kubernetes-hyperscaler-node-professional
                 - name: AR_QUERY
                   value: |
-                    max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+                    max_over_time(
+                      count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+                    [59m:1m])
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         distribution!="rke2",
@@ -16284,7 +16296,9 @@ spec:
                   value: kubernetes-hyperscaler-node-standard
                 - name: AR_QUERY
                   value: |
-                    max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+                    max_over_time(
+                      count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+                    [59m:1m])
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         distribution!="rke2",
@@ -16377,7 +16391,9 @@ spec:
                   value: kubernetes-hyperscaler-node-zero
                 - name: AR_QUERY
                   value: |
-                    max_over_time(sum by(cluster_id) (node_cpu_info)[59m:1m])
+                    max_over_time(
+                      count by(cluster_id) (group by (cluster_id,node) (kube_node_labels))
+                    [59m:1m])
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         distribution!="rke2",
