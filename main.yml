@@ -321,32 +321,32 @@ parameters:
               vshn_service_level: zero
           - product_id: 'openshift-vsphereonprem-workervcpu-besteffort'
             params:
-              cloud_provider: vsphere|vsphereonprem
+              cloud_provider: none|vsphere|vsphereonprem
               role: app
               vshn_service_level: best_effort
           - product_id: 'openshift-vsphereonprem-workervcpu-guaranteed'
             params:
-              cloud_provider: vsphere|vsphereonprem
+              cloud_provider: none|vsphere|vsphereonprem
               role: app
               vshn_service_level: guaranteed_availability
           - product_id: 'openshift-vsphereonprem-workervcpu-premium'
             params:
-              cloud_provider: vsphere|vsphereonprem
+              cloud_provider: none|vsphere|vsphereonprem
               role: app
               vshn_service_level: premium
           - product_id: 'openshift-vsphereonprem-workervcpu-professional'
             params:
-              cloud_provider: vsphere|vsphereonprem
+              cloud_provider: none|vsphere|vsphereonprem
               role: app
               vshn_service_level: professional
           - product_id: 'openshift-vsphereonprem-workervcpu-standard'
             params:
-              cloud_provider: vsphere|vsphereonprem
+              cloud_provider: none|vsphere|vsphereonprem
               role: app
               vshn_service_level: standard
           - product_id: 'openshift-vsphereonprem-workervcpu-zero'
             params:
-              cloud_provider: vsphere|vsphereonprem
+              cloud_provider: none|vsphere|vsphereonprem
               role: app
               vshn_service_level: zero
           - product_id: 'openshift-xelon-workervcpu-besteffort'
