@@ -5550,7 +5550,7 @@ spec:
                     )
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
-                        cloud_provider=~"vsphere|vsphereonprem",
+                        cloud_provider=~"none|vsphere|vsphereonprem",
                         vshn_service_level="best_effort",
                     }
                 - name: AR_INSTANCE_JSONNET
@@ -5653,7 +5653,7 @@ spec:
                     )
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
-                        cloud_provider=~"vsphere|vsphereonprem",
+                        cloud_provider=~"none|vsphere|vsphereonprem",
                         vshn_service_level="guaranteed_availability",
                     }
                 - name: AR_INSTANCE_JSONNET
@@ -5756,7 +5756,7 @@ spec:
                     )
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
-                        cloud_provider=~"vsphere|vsphereonprem",
+                        cloud_provider=~"none|vsphere|vsphereonprem",
                         vshn_service_level="premium",
                     }
                 - name: AR_INSTANCE_JSONNET
@@ -5859,7 +5859,7 @@ spec:
                     )
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
-                        cloud_provider=~"vsphere|vsphereonprem",
+                        cloud_provider=~"none|vsphere|vsphereonprem",
                         vshn_service_level="professional",
                     }
                 - name: AR_INSTANCE_JSONNET
@@ -5962,7 +5962,7 @@ spec:
                     )
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
-                        cloud_provider=~"vsphere|vsphereonprem",
+                        cloud_provider=~"none|vsphere|vsphereonprem",
                         vshn_service_level="standard",
                     }
                 - name: AR_INSTANCE_JSONNET
@@ -6065,7 +6065,7 @@ spec:
                     )
                     # Pull in the APPUiO managed info labels
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
-                        cloud_provider=~"vsphere|vsphereonprem",
+                        cloud_provider=~"none|vsphere|vsphereonprem",
                         vshn_service_level="zero",
                     }
                 - name: AR_INSTANCE_JSONNET
