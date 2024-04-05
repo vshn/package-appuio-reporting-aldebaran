@@ -40,7 +40,7 @@ docs-serve: ## Preview the documentation
 
 .PHONY: query_test
 query_test: querytests/*
-	@for f in $^ ; do $(QUERY_TEST_CMD) /tests/$${f} ; done
+	$(foreach f,$^,$(QUERY_TEST_CMD) /tests/$(f) &&) true
 
 .PHONY: test
 test: .compile query_test ## Compile the package and run query tests
