@@ -50,7 +50,10 @@ local baseSeries = {
     core: '0',
   }, '1x120'),
 
-  appuioInfoLabel: c.series('appuio_managed_info', infoLabels, '1x120'),
+  appuioInfoLabel: c.series('appuio_managed_info', infoLabels, '1x60 _x60'),
+  appuioInfoLabelWithDistribution: c.series('appuio_managed_info', infoLabels {
+    distribution: 'oke',
+  }, '_x30 1x90'),
 };
 
 local baseCalculatedLabels = {
