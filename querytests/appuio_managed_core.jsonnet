@@ -1,17 +1,12 @@
 local c = import 'promtest.libsonnet'; // provided by promtest-jsonnet
 
 local config = std.extVar("main.yml");
-local queryPattern = config.parameters.appuio_reporting_aldebaran.rules.appuio_managed_vcpu.query_pattern ;
+local queryPattern = config.parameters.appuio_reporting_aldebaran.rules.appuio_managed_core.query_pattern ;
 
 local appParams = {
-  cloud_provider: "cloudscale",
+  cloud_provider: "baremetal",
+  distribution: "oke",
   vshn_service_level: "best_effort",
-  role: "app",
-};
-local storageParams = {
-  cloud_provider: "cloudscale",
-  vshn_service_level: "best_effort",
-  role: "storage",
 };
 
 local commonLabels = {
@@ -21,23 +16,30 @@ local commonLabels = {
 local infoLabels = commonLabels {
   tenant_id: 't-managed-openshift',
   vshn_service_level: 'best_effort',
-  cloud_provider: 'cloudscale',
-  distribution: 'openshift4',
+  cloud_provider: 'baremetal',
+  distribution: 'oke',
   sales_order: 'SO123123',
 };
 
 local baseSeries = {
   appNodeRoleLabel: c.series('kube_node_role', commonLabels {
     node: 'app-test',
-    role: 'app',
+    role: 'worker',
   }, '1x120'),
 
   appNodeCPUInfoLabel0: c.series('node_cpu_info', commonLabels {
     instance: 'app-test',
+    cpu: '1',
+    core: '0',
+  }, '1x120'),
+  appNodeCPUInfoLabel2: c.series('node_cpu_info', commonLabels {
+    instance: 'app-test',
+    cpu: '2',
     core: '0',
   }, '1x120'),
   appNodeCPUInfoLabel1: c.series('node_cpu_info', commonLabels {
     instance: 'app-test',
+    cpu: '1',
     core: '1',
   }, '1x120'),
 
@@ -68,23 +70,19 @@ local baseCalculatedLabels = {
       [
         {
           labels: c.formatLabels(baseCalculatedLabels {
-            role: 'app',
+            role: 'worker',
           }),
           value: 2,
         },
       ]
     ),
     c.test(
-      'and one storage CPU',
-      baseSeries,
-      queryPattern % storageParams,
+      'no openshift',
+      baseSeries {
+        appuioInfoLabel: c.series('appuio_managed_info', infoLabels {distribution: 'openshift4'}, '1x120')
+      },
+      queryPattern % appParams,
       [
-        {
-          labels: c.formatLabels(baseCalculatedLabels {
-            role: 'storage',
-          }),
-          value: 1,
-        },
       ]
     ),
   ],
