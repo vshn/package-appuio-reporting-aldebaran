@@ -427,7 +427,7 @@ parameters:
           max_over_time(
             # Sum the vCPUs by cluster
             sum by(cluster_id, role) (
-                # Get the node vCPUs
+                # Get the node cores (without hyperthreads)
                 max without (cpu) (node_cpu_info)
                 # Limit to worker nodes only
                 * on (cluster_id, instance) group_left(role) (
