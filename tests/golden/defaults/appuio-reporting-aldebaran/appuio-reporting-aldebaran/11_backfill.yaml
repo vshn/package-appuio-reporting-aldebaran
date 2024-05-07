@@ -1419,7 +1419,7 @@ spec:
                     max_over_time(
                       # Sum the vCPUs by cluster
                       sum by(cluster_id, role) (
-                          # Get the node vCPUs
+                          # Get the node cores (without hyperthreads)
                           max without (cpu) (node_cpu_info)
                           # Limit to worker nodes only
                           * on (cluster_id, instance) group_left(role) (
@@ -1523,7 +1523,7 @@ spec:
                     max_over_time(
                       # Sum the vCPUs by cluster
                       sum by(cluster_id, role) (
-                          # Get the node vCPUs
+                          # Get the node cores (without hyperthreads)
                           max without (cpu) (node_cpu_info)
                           # Limit to worker nodes only
                           * on (cluster_id, instance) group_left(role) (
@@ -1647,7 +1647,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -1751,7 +1751,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -1855,7 +1855,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -1959,7 +1959,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2063,7 +2063,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2167,7 +2167,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2271,7 +2271,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2375,7 +2375,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2479,7 +2479,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2583,7 +2583,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2687,7 +2687,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2706,13 +2706,221 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   annotations:
+    product-id: openshiftoke-cloudscale-workervcpu-besteffort
+  labels:
+    app.kubernetes.io/managed-by: commodore
+    app.kubernetes.io/name: appuio-reporting
+    app.kubernetes.io/part-of: syn
+    name: openshiftoke-cloudscale-workervcpu-besteffort-11
+  name: openshiftoke-cloudscale-workervcpu-besteffort-11
+  namespace: appuio-reporting-aldebaran
+spec:
+  failedJobsHistoryLimit: 768
+  jobTemplate:
+    metadata:
+      annotations:
+        product-id: openshiftoke-cloudscale-workervcpu-besteffort
+      labels:
+        app.kubernetes.io/managed-by: commodore
+        app.kubernetes.io/name: appuio-reporting
+        app.kubernetes.io/part-of: syn
+        cron-job-name: openshiftoke-cloudscale-workervcpu-besteffort-11
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/managed-by: commodore
+            app.kubernetes.io/name: appuio-reporting
+            app.kubernetes.io/part-of: syn
+        spec:
+          containers:
+            - args:
+                - appuio-reporting report --timerange 1h --begin=$(date -d "now -3
+                  hours" -u +"%Y-%m-%dT%H:00:00Z") --repeat-until=$(date -u -Iseconds)
+              command:
+                - sh
+                - -c
+              env:
+                - name: AR_ODOO_OAUTH_TOKEN_URL
+                  valueFrom:
+                    secretKeyRef:
+                      key: token_endpoint
+                      name: odoo-credentials
+                - name: AR_ODOO_OAUTH_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      key: client_id
+                      name: odoo-credentials
+                - name: AR_ODOO_OAUTH_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      key: client_secret
+                      name: odoo-credentials
+                - name: AR_ODOO_URL
+                - name: AR_PROM_URL
+                  valueFrom:
+                    secretKeyRef:
+                      key: url
+                      name: prom-url
+                - name: AR_PRODUCT_ID
+                  value: openshiftoke-cloudscale-workervcpu-besteffort
+                - name: AR_QUERY
+                  value: |
+                    # Calculates vCPUs for app nodes of a cluster
+                    # Max values over one hour.
+                    max_over_time(
+                      # Sum the vCPUs by cluster
+                      sum by(cluster_id, role) (
+                          # Get the node vCPUs
+                          node_cpu_info
+                          # Limit to worker nodes only
+                          * on (cluster_id, instance) group_left(role) (
+                              # node_cpu_info and kube_node_role use different labels to identify the node.
+                              label_join(kube_node_role{role="app"}, "instance", "", "node")
+                          )
+                      )[59m:1m]
+                    )
+                    # Pull in the APPUiO managed info labels
+                    * on(cluster_id) group_left(sales_order) appuio_managed_info{
+                        cloud_provider=~"cloudscale",
+                        distribution=~"oke",
+                        vshn_service_level="best_effort",
+                    }
+                - name: AR_INSTANCE_JSONNET
+                  value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
+                    % labels
+                - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
+                  value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
+                - name: AR_UNIT_ID
+                  value: uom_uom_49_440b0fa7
+                - name: AR_ORG_ID
+                  value: appuio-managed-openshift-billing
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
+              name: backfill
+              resources: {}
+          initContainers: []
+          restartPolicy: OnFailure
+  schedule: 21 * * * *
+  startingDeadlineSeconds: 180
+  successfulJobsHistoryLimit: 3
+  suspend: false
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    product-id: openshiftoke-cloudscale-workervcpu-guaranteed
+  labels:
+    app.kubernetes.io/managed-by: commodore
+    app.kubernetes.io/name: appuio-reporting
+    app.kubernetes.io/part-of: syn
+    name: openshiftoke-cloudscale-workervcpu-guaranteed-12
+  name: openshiftoke-cloudscale-workervcpu-guaranteed-12
+  namespace: appuio-reporting-aldebaran
+spec:
+  failedJobsHistoryLimit: 768
+  jobTemplate:
+    metadata:
+      annotations:
+        product-id: openshiftoke-cloudscale-workervcpu-guaranteed
+      labels:
+        app.kubernetes.io/managed-by: commodore
+        app.kubernetes.io/name: appuio-reporting
+        app.kubernetes.io/part-of: syn
+        cron-job-name: openshiftoke-cloudscale-workervcpu-guaranteed-12
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/managed-by: commodore
+            app.kubernetes.io/name: appuio-reporting
+            app.kubernetes.io/part-of: syn
+        spec:
+          containers:
+            - args:
+                - appuio-reporting report --timerange 1h --begin=$(date -d "now -3
+                  hours" -u +"%Y-%m-%dT%H:00:00Z") --repeat-until=$(date -u -Iseconds)
+              command:
+                - sh
+                - -c
+              env:
+                - name: AR_ODOO_OAUTH_TOKEN_URL
+                  valueFrom:
+                    secretKeyRef:
+                      key: token_endpoint
+                      name: odoo-credentials
+                - name: AR_ODOO_OAUTH_CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      key: client_id
+                      name: odoo-credentials
+                - name: AR_ODOO_OAUTH_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      key: client_secret
+                      name: odoo-credentials
+                - name: AR_ODOO_URL
+                - name: AR_PROM_URL
+                  valueFrom:
+                    secretKeyRef:
+                      key: url
+                      name: prom-url
+                - name: AR_PRODUCT_ID
+                  value: openshiftoke-cloudscale-workervcpu-guaranteed
+                - name: AR_QUERY
+                  value: |
+                    # Calculates vCPUs for app nodes of a cluster
+                    # Max values over one hour.
+                    max_over_time(
+                      # Sum the vCPUs by cluster
+                      sum by(cluster_id, role) (
+                          # Get the node vCPUs
+                          node_cpu_info
+                          # Limit to worker nodes only
+                          * on (cluster_id, instance) group_left(role) (
+                              # node_cpu_info and kube_node_role use different labels to identify the node.
+                              label_join(kube_node_role{role="app"}, "instance", "", "node")
+                          )
+                      )[59m:1m]
+                    )
+                    # Pull in the APPUiO managed info labels
+                    * on(cluster_id) group_left(sales_order) appuio_managed_info{
+                        cloud_provider=~"cloudscale",
+                        distribution=~"oke",
+                        vshn_service_level="guaranteed",
+                    }
+                - name: AR_INSTANCE_JSONNET
+                  value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
+                    % labels
+                - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
+                  value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
+                - name: AR_UNIT_ID
+                  value: uom_uom_49_440b0fa7
+                - name: AR_ORG_ID
+                  value: appuio-managed-openshift-billing
+              image: ghcr.io/appuio/appuio-reporting:v0.2.2
+              name: backfill
+              resources: {}
+          initContainers: []
+          restartPolicy: OnFailure
+  schedule: 22 * * * *
+  startingDeadlineSeconds: 180
+  successfulJobsHistoryLimit: 3
+  suspend: false
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
     product-id: openshift-exoscale-storagevcpu-besteffort
   labels:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-storagevcpu-besteffort-11
-  name: openshift-exoscale-storagevcpu-besteffort-11
+    name: openshift-exoscale-storagevcpu-besteffort-13
+  name: openshift-exoscale-storagevcpu-besteffort-13
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -2724,7 +2932,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-storagevcpu-besteffort-11
+        cron-job-name: openshift-exoscale-storagevcpu-besteffort-13
     spec:
       template:
         metadata:
@@ -2791,7 +2999,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2801,7 +3009,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 21 * * * *
+  schedule: 23 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -2815,8 +3023,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-storagevcpu-guaranteed-12
-  name: openshift-exoscale-storagevcpu-guaranteed-12
+    name: openshift-exoscale-storagevcpu-guaranteed-14
+  name: openshift-exoscale-storagevcpu-guaranteed-14
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -2828,7 +3036,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-storagevcpu-guaranteed-12
+        cron-job-name: openshift-exoscale-storagevcpu-guaranteed-14
     spec:
       template:
         metadata:
@@ -2895,7 +3103,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -2905,7 +3113,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 22 * * * *
+  schedule: 24 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -2919,8 +3127,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-storagevcpu-premium-13
-  name: openshift-exoscale-storagevcpu-premium-13
+    name: openshift-exoscale-storagevcpu-premium-15
+  name: openshift-exoscale-storagevcpu-premium-15
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -2932,7 +3140,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-storagevcpu-premium-13
+        cron-job-name: openshift-exoscale-storagevcpu-premium-15
     spec:
       template:
         metadata:
@@ -2999,7 +3207,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3009,7 +3217,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 23 * * * *
+  schedule: 25 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3023,8 +3231,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-storagevcpu-professional-14
-  name: openshift-exoscale-storagevcpu-professional-14
+    name: openshift-exoscale-storagevcpu-professional-16
+  name: openshift-exoscale-storagevcpu-professional-16
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3036,7 +3244,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-storagevcpu-professional-14
+        cron-job-name: openshift-exoscale-storagevcpu-professional-16
     spec:
       template:
         metadata:
@@ -3103,7 +3311,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3113,7 +3321,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 24 * * * *
+  schedule: 26 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3127,8 +3335,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-storagevcpu-standard-15
-  name: openshift-exoscale-storagevcpu-standard-15
+    name: openshift-exoscale-storagevcpu-standard-17
+  name: openshift-exoscale-storagevcpu-standard-17
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3140,7 +3348,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-storagevcpu-standard-15
+        cron-job-name: openshift-exoscale-storagevcpu-standard-17
     spec:
       template:
         metadata:
@@ -3207,7 +3415,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3217,7 +3425,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 25 * * * *
+  schedule: 27 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3231,8 +3439,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-workervcpu-besteffort-16
-  name: openshift-exoscale-workervcpu-besteffort-16
+    name: openshift-exoscale-workervcpu-besteffort-18
+  name: openshift-exoscale-workervcpu-besteffort-18
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3244,7 +3452,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-workervcpu-besteffort-16
+        cron-job-name: openshift-exoscale-workervcpu-besteffort-18
     spec:
       template:
         metadata:
@@ -3311,7 +3519,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3321,7 +3529,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 26 * * * *
+  schedule: 28 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3335,8 +3543,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-workervcpu-guaranteed-17
-  name: openshift-exoscale-workervcpu-guaranteed-17
+    name: openshift-exoscale-workervcpu-guaranteed-19
+  name: openshift-exoscale-workervcpu-guaranteed-19
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3348,7 +3556,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-workervcpu-guaranteed-17
+        cron-job-name: openshift-exoscale-workervcpu-guaranteed-19
     spec:
       template:
         metadata:
@@ -3415,7 +3623,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3425,7 +3633,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 27 * * * *
+  schedule: 29 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3439,8 +3647,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-workervcpu-premium-18
-  name: openshift-exoscale-workervcpu-premium-18
+    name: openshift-exoscale-workervcpu-premium-20
+  name: openshift-exoscale-workervcpu-premium-20
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3452,7 +3660,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-workervcpu-premium-18
+        cron-job-name: openshift-exoscale-workervcpu-premium-20
     spec:
       template:
         metadata:
@@ -3519,7 +3727,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3529,7 +3737,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 28 * * * *
+  schedule: 30 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3543,8 +3751,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-workervcpu-professional-19
-  name: openshift-exoscale-workervcpu-professional-19
+    name: openshift-exoscale-workervcpu-professional-21
+  name: openshift-exoscale-workervcpu-professional-21
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3556,7 +3764,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-workervcpu-professional-19
+        cron-job-name: openshift-exoscale-workervcpu-professional-21
     spec:
       template:
         metadata:
@@ -3623,7 +3831,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3633,7 +3841,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 29 * * * *
+  schedule: 31 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3647,8 +3855,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-workervcpu-standard-20
-  name: openshift-exoscale-workervcpu-standard-20
+    name: openshift-exoscale-workervcpu-standard-22
+  name: openshift-exoscale-workervcpu-standard-22
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3660,7 +3868,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-workervcpu-standard-20
+        cron-job-name: openshift-exoscale-workervcpu-standard-22
     spec:
       template:
         metadata:
@@ -3727,7 +3935,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3737,7 +3945,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 30 * * * *
+  schedule: 32 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3751,8 +3959,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-exoscale-workervcpu-zero-21
-  name: openshift-exoscale-workervcpu-zero-21
+    name: openshift-exoscale-workervcpu-zero-23
+  name: openshift-exoscale-workervcpu-zero-23
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3764,7 +3972,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-exoscale-workervcpu-zero-21
+        cron-job-name: openshift-exoscale-workervcpu-zero-23
     spec:
       template:
         metadata:
@@ -3831,7 +4039,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3841,7 +4049,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 31 * * * *
+  schedule: 33 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3855,8 +4063,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackcsp-workervcpu-besteffort-22
-  name: openshift-openstackcsp-workervcpu-besteffort-22
+    name: openshift-openstackcsp-workervcpu-besteffort-24
+  name: openshift-openstackcsp-workervcpu-besteffort-24
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3868,7 +4076,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackcsp-workervcpu-besteffort-22
+        cron-job-name: openshift-openstackcsp-workervcpu-besteffort-24
     spec:
       template:
         metadata:
@@ -3935,7 +4143,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -3945,7 +4153,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 32 * * * *
+  schedule: 34 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -3959,8 +4167,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackcsp-workervcpu-guaranteed-23
-  name: openshift-openstackcsp-workervcpu-guaranteed-23
+    name: openshift-openstackcsp-workervcpu-guaranteed-25
+  name: openshift-openstackcsp-workervcpu-guaranteed-25
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -3972,7 +4180,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackcsp-workervcpu-guaranteed-23
+        cron-job-name: openshift-openstackcsp-workervcpu-guaranteed-25
     spec:
       template:
         metadata:
@@ -4039,7 +4247,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4049,7 +4257,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 33 * * * *
+  schedule: 35 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4063,8 +4271,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackcsp-workervcpu-premium-24
-  name: openshift-openstackcsp-workervcpu-premium-24
+    name: openshift-openstackcsp-workervcpu-premium-26
+  name: openshift-openstackcsp-workervcpu-premium-26
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4076,7 +4284,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackcsp-workervcpu-premium-24
+        cron-job-name: openshift-openstackcsp-workervcpu-premium-26
     spec:
       template:
         metadata:
@@ -4143,7 +4351,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4153,7 +4361,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 34 * * * *
+  schedule: 36 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4167,8 +4375,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackcsp-workervcpu-professional-25
-  name: openshift-openstackcsp-workervcpu-professional-25
+    name: openshift-openstackcsp-workervcpu-professional-27
+  name: openshift-openstackcsp-workervcpu-professional-27
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4180,7 +4388,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackcsp-workervcpu-professional-25
+        cron-job-name: openshift-openstackcsp-workervcpu-professional-27
     spec:
       template:
         metadata:
@@ -4247,7 +4455,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4257,7 +4465,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 35 * * * *
+  schedule: 37 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4271,8 +4479,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackcsp-workervcpu-standard-26
-  name: openshift-openstackcsp-workervcpu-standard-26
+    name: openshift-openstackcsp-workervcpu-standard-28
+  name: openshift-openstackcsp-workervcpu-standard-28
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4284,7 +4492,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackcsp-workervcpu-standard-26
+        cron-job-name: openshift-openstackcsp-workervcpu-standard-28
     spec:
       template:
         metadata:
@@ -4351,7 +4559,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4361,7 +4569,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 36 * * * *
+  schedule: 38 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4375,8 +4583,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackcsp-workervcpu-zero-27
-  name: openshift-openstackcsp-workervcpu-zero-27
+    name: openshift-openstackcsp-workervcpu-zero-29
+  name: openshift-openstackcsp-workervcpu-zero-29
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4388,7 +4596,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackcsp-workervcpu-zero-27
+        cron-job-name: openshift-openstackcsp-workervcpu-zero-29
     spec:
       template:
         metadata:
@@ -4455,7 +4663,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4465,7 +4673,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 37 * * * *
+  schedule: 39 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4479,8 +4687,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackonprem-workervcpu-besteffort-28
-  name: openshift-openstackonprem-workervcpu-besteffort-28
+    name: openshift-openstackonprem-workervcpu-besteffort-30
+  name: openshift-openstackonprem-workervcpu-besteffort-30
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4492,7 +4700,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackonprem-workervcpu-besteffort-28
+        cron-job-name: openshift-openstackonprem-workervcpu-besteffort-30
     spec:
       template:
         metadata:
@@ -4559,7 +4767,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4569,7 +4777,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 38 * * * *
+  schedule: 40 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4583,8 +4791,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackonprem-workervcpu-guaranteed-29
-  name: openshift-openstackonprem-workervcpu-guaranteed-29
+    name: openshift-openstackonprem-workervcpu-guaranteed-31
+  name: openshift-openstackonprem-workervcpu-guaranteed-31
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4596,7 +4804,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackonprem-workervcpu-guaranteed-29
+        cron-job-name: openshift-openstackonprem-workervcpu-guaranteed-31
     spec:
       template:
         metadata:
@@ -4663,7 +4871,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4673,7 +4881,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 39 * * * *
+  schedule: 41 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4687,8 +4895,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackonprem-workervcpu-premium-30
-  name: openshift-openstackonprem-workervcpu-premium-30
+    name: openshift-openstackonprem-workervcpu-premium-32
+  name: openshift-openstackonprem-workervcpu-premium-32
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4700,7 +4908,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackonprem-workervcpu-premium-30
+        cron-job-name: openshift-openstackonprem-workervcpu-premium-32
     spec:
       template:
         metadata:
@@ -4767,7 +4975,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4777,7 +4985,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 40 * * * *
+  schedule: 42 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4791,8 +4999,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackonprem-workervcpu-8b0ab0abec678e9
-  name: openshift-openstackonprem-workervcpu-8b0ab0abec678e9
+    name: openshift-openstackonprem-workervcpu-2d240eb028d9405
+  name: openshift-openstackonprem-workervcpu-2d240eb028d9405
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4804,7 +5012,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackonprem-workervcpu-professional-31
+        cron-job-name: openshift-openstackonprem-workervcpu-professional-33
     spec:
       template:
         metadata:
@@ -4871,7 +5079,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4881,7 +5089,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 41 * * * *
+  schedule: 43 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4895,8 +5103,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackonprem-workervcpu-standard-32
-  name: openshift-openstackonprem-workervcpu-standard-32
+    name: openshift-openstackonprem-workervcpu-standard-34
+  name: openshift-openstackonprem-workervcpu-standard-34
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -4908,7 +5116,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackonprem-workervcpu-standard-32
+        cron-job-name: openshift-openstackonprem-workervcpu-standard-34
     spec:
       template:
         metadata:
@@ -4975,7 +5183,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -4985,7 +5193,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 42 * * * *
+  schedule: 44 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -4999,8 +5207,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-openstackonprem-workervcpu-zero-33
-  name: openshift-openstackonprem-workervcpu-zero-33
+    name: openshift-openstackonprem-workervcpu-zero-35
+  name: openshift-openstackonprem-workervcpu-zero-35
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5012,7 +5220,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-openstackonprem-workervcpu-zero-33
+        cron-job-name: openshift-openstackonprem-workervcpu-zero-35
     spec:
       template:
         metadata:
@@ -5079,7 +5287,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5089,7 +5297,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 43 * * * *
+  schedule: 45 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5103,8 +5311,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vspherecsp-workervcpu-besteffort-34
-  name: openshift-vspherecsp-workervcpu-besteffort-34
+    name: openshift-vspherecsp-workervcpu-besteffort-36
+  name: openshift-vspherecsp-workervcpu-besteffort-36
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5116,7 +5324,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vspherecsp-workervcpu-besteffort-34
+        cron-job-name: openshift-vspherecsp-workervcpu-besteffort-36
     spec:
       template:
         metadata:
@@ -5183,7 +5391,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5193,7 +5401,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 44 * * * *
+  schedule: 46 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5207,8 +5415,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vspherecsp-workervcpu-guaranteed-35
-  name: openshift-vspherecsp-workervcpu-guaranteed-35
+    name: openshift-vspherecsp-workervcpu-guaranteed-37
+  name: openshift-vspherecsp-workervcpu-guaranteed-37
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5220,7 +5428,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vspherecsp-workervcpu-guaranteed-35
+        cron-job-name: openshift-vspherecsp-workervcpu-guaranteed-37
     spec:
       template:
         metadata:
@@ -5287,7 +5495,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5297,7 +5505,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 45 * * * *
+  schedule: 47 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5311,8 +5519,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vspherecsp-workervcpu-premium-36
-  name: openshift-vspherecsp-workervcpu-premium-36
+    name: openshift-vspherecsp-workervcpu-premium-38
+  name: openshift-vspherecsp-workervcpu-premium-38
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5324,7 +5532,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vspherecsp-workervcpu-premium-36
+        cron-job-name: openshift-vspherecsp-workervcpu-premium-38
     spec:
       template:
         metadata:
@@ -5391,7 +5599,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5401,7 +5609,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 46 * * * *
+  schedule: 48 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5415,8 +5623,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vspherecsp-workervcpu-professional-37
-  name: openshift-vspherecsp-workervcpu-professional-37
+    name: openshift-vspherecsp-workervcpu-professional-39
+  name: openshift-vspherecsp-workervcpu-professional-39
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5428,7 +5636,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vspherecsp-workervcpu-professional-37
+        cron-job-name: openshift-vspherecsp-workervcpu-professional-39
     spec:
       template:
         metadata:
@@ -5495,7 +5703,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5505,7 +5713,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 47 * * * *
+  schedule: 49 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5519,8 +5727,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vspherecsp-workervcpu-standard-38
-  name: openshift-vspherecsp-workervcpu-standard-38
+    name: openshift-vspherecsp-workervcpu-standard-40
+  name: openshift-vspherecsp-workervcpu-standard-40
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5532,7 +5740,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vspherecsp-workervcpu-standard-38
+        cron-job-name: openshift-vspherecsp-workervcpu-standard-40
     spec:
       template:
         metadata:
@@ -5599,7 +5807,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5609,7 +5817,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 48 * * * *
+  schedule: 50 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5623,8 +5831,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vspherecsp-workervcpu-zero-39
-  name: openshift-vspherecsp-workervcpu-zero-39
+    name: openshift-vspherecsp-workervcpu-zero-41
+  name: openshift-vspherecsp-workervcpu-zero-41
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5636,7 +5844,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vspherecsp-workervcpu-zero-39
+        cron-job-name: openshift-vspherecsp-workervcpu-zero-41
     spec:
       template:
         metadata:
@@ -5703,7 +5911,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5713,7 +5921,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 49 * * * *
+  schedule: 10 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5727,8 +5935,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vsphereonprem-workervcpu-besteffort-40
-  name: openshift-vsphereonprem-workervcpu-besteffort-40
+    name: openshift-vsphereonprem-workervcpu-besteffort-42
+  name: openshift-vsphereonprem-workervcpu-besteffort-42
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5740,7 +5948,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vsphereonprem-workervcpu-besteffort-40
+        cron-job-name: openshift-vsphereonprem-workervcpu-besteffort-42
     spec:
       template:
         metadata:
@@ -5807,7 +6015,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5817,7 +6025,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 50 * * * *
+  schedule: 11 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5831,8 +6039,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vsphereonprem-workervcpu-guaranteed-41
-  name: openshift-vsphereonprem-workervcpu-guaranteed-41
+    name: openshift-vsphereonprem-workervcpu-guaranteed-43
+  name: openshift-vsphereonprem-workervcpu-guaranteed-43
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5844,7 +6052,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vsphereonprem-workervcpu-guaranteed-41
+        cron-job-name: openshift-vsphereonprem-workervcpu-guaranteed-43
     spec:
       template:
         metadata:
@@ -5911,7 +6119,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -5921,7 +6129,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 10 * * * *
+  schedule: 12 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -5935,8 +6143,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vsphereonprem-workervcpu-premium-42
-  name: openshift-vsphereonprem-workervcpu-premium-42
+    name: openshift-vsphereonprem-workervcpu-premium-44
+  name: openshift-vsphereonprem-workervcpu-premium-44
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -5948,7 +6156,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vsphereonprem-workervcpu-premium-42
+        cron-job-name: openshift-vsphereonprem-workervcpu-premium-44
     spec:
       template:
         metadata:
@@ -6015,7 +6223,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6025,7 +6233,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 11 * * * *
+  schedule: 13 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6039,8 +6247,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vsphereonprem-workervcpu-professional-43
-  name: openshift-vsphereonprem-workervcpu-professional-43
+    name: openshift-vsphereonprem-workervcpu-professional-45
+  name: openshift-vsphereonprem-workervcpu-professional-45
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6052,7 +6260,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vsphereonprem-workervcpu-professional-43
+        cron-job-name: openshift-vsphereonprem-workervcpu-professional-45
     spec:
       template:
         metadata:
@@ -6119,7 +6327,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6129,7 +6337,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 12 * * * *
+  schedule: 14 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6143,8 +6351,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vsphereonprem-workervcpu-standard-44
-  name: openshift-vsphereonprem-workervcpu-standard-44
+    name: openshift-vsphereonprem-workervcpu-standard-46
+  name: openshift-vsphereonprem-workervcpu-standard-46
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6156,7 +6364,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vsphereonprem-workervcpu-standard-44
+        cron-job-name: openshift-vsphereonprem-workervcpu-standard-46
     spec:
       template:
         metadata:
@@ -6223,7 +6431,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6233,7 +6441,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 13 * * * *
+  schedule: 15 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6247,8 +6455,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-vsphereonprem-workervcpu-zero-45
-  name: openshift-vsphereonprem-workervcpu-zero-45
+    name: openshift-vsphereonprem-workervcpu-zero-47
+  name: openshift-vsphereonprem-workervcpu-zero-47
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6260,7 +6468,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-vsphereonprem-workervcpu-zero-45
+        cron-job-name: openshift-vsphereonprem-workervcpu-zero-47
     spec:
       template:
         metadata:
@@ -6327,7 +6535,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6337,7 +6545,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 14 * * * *
+  schedule: 16 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6351,8 +6559,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-xelon-workervcpu-besteffort-46
-  name: openshift-xelon-workervcpu-besteffort-46
+    name: openshift-xelon-workervcpu-besteffort-48
+  name: openshift-xelon-workervcpu-besteffort-48
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6364,7 +6572,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-xelon-workervcpu-besteffort-46
+        cron-job-name: openshift-xelon-workervcpu-besteffort-48
     spec:
       template:
         metadata:
@@ -6431,7 +6639,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6441,7 +6649,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 15 * * * *
+  schedule: 17 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6455,8 +6663,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-xelon-workervcpu-guaranteed-47
-  name: openshift-xelon-workervcpu-guaranteed-47
+    name: openshift-xelon-workervcpu-guaranteed-49
+  name: openshift-xelon-workervcpu-guaranteed-49
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6468,7 +6676,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-xelon-workervcpu-guaranteed-47
+        cron-job-name: openshift-xelon-workervcpu-guaranteed-49
     spec:
       template:
         metadata:
@@ -6535,7 +6743,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6545,7 +6753,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 16 * * * *
+  schedule: 18 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6559,8 +6767,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-xelon-workervcpu-premium-48
-  name: openshift-xelon-workervcpu-premium-48
+    name: openshift-xelon-workervcpu-premium-50
+  name: openshift-xelon-workervcpu-premium-50
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6572,7 +6780,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-xelon-workervcpu-premium-48
+        cron-job-name: openshift-xelon-workervcpu-premium-50
     spec:
       template:
         metadata:
@@ -6639,7 +6847,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6649,7 +6857,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 17 * * * *
+  schedule: 19 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6663,8 +6871,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-xelon-workervcpu-professional-49
-  name: openshift-xelon-workervcpu-professional-49
+    name: openshift-xelon-workervcpu-professional-51
+  name: openshift-xelon-workervcpu-professional-51
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6676,7 +6884,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-xelon-workervcpu-professional-49
+        cron-job-name: openshift-xelon-workervcpu-professional-51
     spec:
       template:
         metadata:
@@ -6743,7 +6951,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6753,7 +6961,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 18 * * * *
+  schedule: 20 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6767,8 +6975,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-xelon-workervcpu-standard-50
-  name: openshift-xelon-workervcpu-standard-50
+    name: openshift-xelon-workervcpu-standard-52
+  name: openshift-xelon-workervcpu-standard-52
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6780,7 +6988,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-xelon-workervcpu-standard-50
+        cron-job-name: openshift-xelon-workervcpu-standard-52
     spec:
       template:
         metadata:
@@ -6847,7 +7055,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6857,7 +7065,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 19 * * * *
+  schedule: 21 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
@@ -6871,8 +7079,8 @@ metadata:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: openshift-xelon-workervcpu-zero-51
-  name: openshift-xelon-workervcpu-zero-51
+    name: openshift-xelon-workervcpu-zero-53
+  name: openshift-xelon-workervcpu-zero-53
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
@@ -6884,7 +7092,7 @@ spec:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: openshift-xelon-workervcpu-zero-51
+        cron-job-name: openshift-xelon-workervcpu-zero-53
     spec:
       template:
         metadata:
@@ -6951,7 +7159,7 @@ spec:
                     % labels
                 - name: AR_ITEM_GROUP_DESCRIPTION_JSONNET
                   value: 'local labels = std.extVar("labels"); "APPUiO Managed OpenShift
-                    - Cluster: %(cluster_id)s" % labels'
+                    %(flavor_display)s - Cluster: %(cluster_id)s" % labels'
                 - name: AR_UNIT_ID
                   value: uom_uom_49_440b0fa7
                 - name: AR_ORG_ID
@@ -6961,7 +7169,7 @@ spec:
               resources: {}
           initContainers: []
           restartPolicy: OnFailure
-  schedule: 20 * * * *
+  schedule: 22 * * * *
   startingDeadlineSeconds: 180
   successfulJobsHistoryLimit: 3
   suspend: false
