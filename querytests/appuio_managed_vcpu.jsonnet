@@ -6,11 +6,13 @@ local queryPattern = config.parameters.appuio_reporting_aldebaran.rules.appuio_m
 local appParams = {
   cloud_provider: "cloudscale",
   vshn_service_level: "best_effort",
+  distribution: "openshift4",
   role: "app",
 };
 local storageParams = {
   cloud_provider: "cloudscale",
   vshn_service_level: "best_effort",
+  distribution: "openshift4",
   role: "storage",
 };
 
