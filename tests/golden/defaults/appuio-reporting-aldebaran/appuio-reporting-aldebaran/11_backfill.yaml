@@ -1622,6 +1622,7 @@ spec:
                   value: openshift-cloudscale-storagevcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -1642,6 +1643,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -1726,6 +1728,7 @@ spec:
                   value: openshift-cloudscale-storagevcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -1746,6 +1749,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -1830,6 +1834,7 @@ spec:
                   value: openshift-cloudscale-storagevcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -1850,6 +1855,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -1934,6 +1940,7 @@ spec:
                   value: openshift-cloudscale-storagevcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -1954,6 +1961,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2038,6 +2046,7 @@ spec:
                   value: openshift-cloudscale-storagevcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2058,6 +2067,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2142,6 +2152,7 @@ spec:
                   value: openshift-cloudscale-workervcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2162,6 +2173,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2246,6 +2258,7 @@ spec:
                   value: openshift-cloudscale-workervcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2266,6 +2279,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2350,6 +2364,7 @@ spec:
                   value: openshift-cloudscale-workervcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2370,6 +2385,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2454,6 +2470,7 @@ spec:
                   value: openshift-cloudscale-workervcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2474,6 +2491,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2558,6 +2576,7 @@ spec:
                   value: openshift-cloudscale-workervcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2578,6 +2597,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2662,6 +2682,7 @@ spec:
                   value: openshift-cloudscale-workervcpu-zero
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2682,6 +2703,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="zero",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2766,6 +2788,7 @@ spec:
                   value: openshiftoke-cloudscale-workervcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2786,6 +2809,7 @@ spec:
                         distribution=~"oke",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Kubernetes Engine", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2870,6 +2894,7 @@ spec:
                   value: openshiftoke-cloudscale-workervcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2890,6 +2915,7 @@ spec:
                         distribution=~"oke",
                         vshn_service_level="guaranteed",
                     }
+                    , "flavor_display", "Kubernetes Engine", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -2974,6 +3000,7 @@ spec:
                   value: openshift-exoscale-storagevcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -2994,6 +3021,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3078,6 +3106,7 @@ spec:
                   value: openshift-exoscale-storagevcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3098,6 +3127,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3182,6 +3212,7 @@ spec:
                   value: openshift-exoscale-storagevcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3202,6 +3233,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3286,6 +3318,7 @@ spec:
                   value: openshift-exoscale-storagevcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3306,6 +3339,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3390,6 +3424,7 @@ spec:
                   value: openshift-exoscale-storagevcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3410,6 +3445,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3494,6 +3530,7 @@ spec:
                   value: openshift-exoscale-workervcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3514,6 +3551,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3598,6 +3636,7 @@ spec:
                   value: openshift-exoscale-workervcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3618,6 +3657,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3702,6 +3742,7 @@ spec:
                   value: openshift-exoscale-workervcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3722,6 +3763,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3806,6 +3848,7 @@ spec:
                   value: openshift-exoscale-workervcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3826,6 +3869,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -3910,6 +3954,7 @@ spec:
                   value: openshift-exoscale-workervcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -3930,6 +3975,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4014,6 +4060,7 @@ spec:
                   value: openshift-exoscale-workervcpu-zero
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4034,6 +4081,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="zero",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4118,6 +4166,7 @@ spec:
                   value: openshift-openstackcsp-workervcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4138,6 +4187,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4222,6 +4272,7 @@ spec:
                   value: openshift-openstackcsp-workervcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4242,6 +4293,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4326,6 +4378,7 @@ spec:
                   value: openshift-openstackcsp-workervcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4346,6 +4399,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4430,6 +4484,7 @@ spec:
                   value: openshift-openstackcsp-workervcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4450,6 +4505,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4534,6 +4590,7 @@ spec:
                   value: openshift-openstackcsp-workervcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4554,6 +4611,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4638,6 +4696,7 @@ spec:
                   value: openshift-openstackcsp-workervcpu-zero
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4658,6 +4717,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="zero",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4742,6 +4802,7 @@ spec:
                   value: openshift-openstackonprem-workervcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4762,6 +4823,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4846,6 +4908,7 @@ spec:
                   value: openshift-openstackonprem-workervcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4866,6 +4929,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -4950,6 +5014,7 @@ spec:
                   value: openshift-openstackonprem-workervcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -4970,6 +5035,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5054,6 +5120,7 @@ spec:
                   value: openshift-openstackonprem-workervcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5074,6 +5141,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5158,6 +5226,7 @@ spec:
                   value: openshift-openstackonprem-workervcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5178,6 +5247,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5262,6 +5332,7 @@ spec:
                   value: openshift-openstackonprem-workervcpu-zero
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5282,6 +5353,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="zero",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5366,6 +5438,7 @@ spec:
                   value: openshift-vspherecsp-workervcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5386,6 +5459,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5470,6 +5544,7 @@ spec:
                   value: openshift-vspherecsp-workervcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5490,6 +5565,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5574,6 +5650,7 @@ spec:
                   value: openshift-vspherecsp-workervcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5594,6 +5671,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5678,6 +5756,7 @@ spec:
                   value: openshift-vspherecsp-workervcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5698,6 +5777,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5782,6 +5862,7 @@ spec:
                   value: openshift-vspherecsp-workervcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5802,6 +5883,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5886,6 +5968,7 @@ spec:
                   value: openshift-vspherecsp-workervcpu-zero
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -5906,6 +5989,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="zero",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -5990,6 +6074,7 @@ spec:
                   value: openshift-vsphereonprem-workervcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6010,6 +6095,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6094,6 +6180,7 @@ spec:
                   value: openshift-vsphereonprem-workervcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6114,6 +6201,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6198,6 +6286,7 @@ spec:
                   value: openshift-vsphereonprem-workervcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6218,6 +6307,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6302,6 +6392,7 @@ spec:
                   value: openshift-vsphereonprem-workervcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6322,6 +6413,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6406,6 +6498,7 @@ spec:
                   value: openshift-vsphereonprem-workervcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6426,6 +6519,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6510,6 +6604,7 @@ spec:
                   value: openshift-vsphereonprem-workervcpu-zero
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6530,6 +6625,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="zero",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6614,6 +6710,7 @@ spec:
                   value: openshift-xelon-workervcpu-besteffort
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6634,6 +6731,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="best_effort",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6718,6 +6816,7 @@ spec:
                   value: openshift-xelon-workervcpu-guaranteed
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6738,6 +6837,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="guaranteed_availability",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6822,6 +6922,7 @@ spec:
                   value: openshift-xelon-workervcpu-premium
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6842,6 +6943,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="premium",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -6926,6 +7028,7 @@ spec:
                   value: openshift-xelon-workervcpu-professional
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -6946,6 +7049,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="professional",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -7030,6 +7134,7 @@ spec:
                   value: openshift-xelon-workervcpu-standard
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -7050,6 +7155,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="standard",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels
@@ -7134,6 +7240,7 @@ spec:
                   value: openshift-xelon-workervcpu-zero
                 - name: AR_QUERY
                   value: |
+                    label_replace(
                     # Calculates vCPUs for app nodes of a cluster
                     # Max values over one hour.
                     max_over_time(
@@ -7154,6 +7261,7 @@ spec:
                         distribution=~"openshift4",
                         vshn_service_level="zero",
                     }
+                    , "flavor_display", "Container Platform", "", "")
                 - name: AR_INSTANCE_JSONNET
                   value: local labels = std.extVar("labels"); "ocp-vcpu-%(cluster_id)s-%(role)s"
                     % labels

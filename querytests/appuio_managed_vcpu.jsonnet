@@ -8,12 +8,14 @@ local appParams = {
   vshn_service_level: "best_effort",
   distribution: "openshift4",
   role: "app",
+  flavor_display: "OpenShift Container Platform"
 };
 local storageParams = {
   cloud_provider: "cloudscale",
   vshn_service_level: "best_effort",
   distribution: "openshift4",
   role: "storage",
+  flavor_display: "OpenShift Container Platform"
 };
 
 local commonLabels = {
@@ -59,6 +61,7 @@ local baseSeries = {
 local baseCalculatedLabels = {
   cluster_id: "c-managed-openshift",
   sales_order: "SO123123",
+  flavor_display: "OpenShift Container Platform",
 };
 
 {
