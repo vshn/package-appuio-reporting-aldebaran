@@ -501,6 +501,7 @@ parameters:
         item_group_description_pattern: 'APPUiO Managed OpenShift %(flavor_display)s - Cluster: %(cluster_id)s'
         unit_id: 'uom_uom_49_440b0fa7' #vCPU-Hour
         query_pattern: |
+          label_replace(
           # Calculates vCPUs for app nodes of a cluster
           # Max values over one hour.
           max_over_time(
@@ -521,6 +522,7 @@ parameters:
               distribution=~"%(distribution)s",
               vshn_service_level="%(vshn_service_level)s",
           }
+          , "flavor_display", "%(flavor_display)s", "", "")
 
       appuio_managed_core:
         enabled: true
