@@ -209,7 +209,7 @@ parameters:
               role: app
               distribution: oke
               flavor_display: Kubernetes Engine
-              vshn_service_level: guaranteed
+              vshn_service_level: guaranteed_availability
           - product_id: 'openshift-exoscale-storagevcpu-besteffort'
             params:
               cloud_provider: exoscale

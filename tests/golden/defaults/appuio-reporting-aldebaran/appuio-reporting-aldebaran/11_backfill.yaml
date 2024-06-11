@@ -2913,7 +2913,7 @@ spec:
                     * on(cluster_id) group_left(sales_order) appuio_managed_info{
                         cloud_provider=~"cloudscale",
                         distribution=~"oke",
-                        vshn_service_level="guaranteed",
+                        vshn_service_level="guaranteed_availability",
                     }
                     , "flavor_display", "Kubernetes Engine", "", "")
                 - name: AR_INSTANCE_JSONNET
