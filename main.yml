@@ -845,7 +845,11 @@ parameters:
                   on(organization)
                   group_left(sales_order)
                   (
-                    appuio_control_organization_info{namespace="appuio-control-api-production"}
+                    # Drop pod and instance labels so we gracefully handle
+                    # short time periods (e.g. during maintenance) where it's
+                    # possible that metrics are scraped from two control-api
+                    # pods.
+                    max without (pod,instance) (appuio_control_organization_info{namespace="appuio-control-api-production"})
                   ),
                   # At least return 128MiB
                   128 * 1024 * 1024
@@ -949,7 +953,11 @@ parameters:
                     on(organization)
                     group_left(sales_order)
                     (
-                      appuio_control_organization_info{namespace="appuio-control-api-production"}
+                      # Drop pod and instance labels so we gracefully handle
+                      # short time periods (e.g. during maintenance) where it's
+                      # possible that metrics are scraped from two control-api
+                      # pods.
+                      max without (pod,instance) (appuio_control_organization_info{namespace="appuio-control-api-production"})
                     )
                   ),
                   1024 * 1024 * 1024
@@ -998,7 +1006,11 @@ parameters:
                 on(organization)
                 group_left(sales_order)
                 (
-                  appuio_control_organization_info{namespace="appuio-control-api-production"}
+                  # Drop pod and instance labels so we gracefully handle
+                  # short time periods (e.g. during maintenance) where it's
+                  # possible that metrics are scraped from two control-api
+                  # pods.
+                  max without (pod,instance) (appuio_control_organization_info{namespace="appuio-control-api-production"})
                 )
               )[59m:1m]
             )
