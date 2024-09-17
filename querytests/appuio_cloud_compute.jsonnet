@@ -1,13 +1,12 @@
+local c = import 'promtest.libsonnet';  // provided by promtest-jsonnet
 
-local c = import 'promtest.libsonnet'; // provided by promtest-jsonnet
-
-local config = std.extVar("main.yml");
-local queryPattern = config.parameters.appuio_reporting_aldebaran.rules.appuio_cloud_compute.query_pattern ;
+local config = std.extVar('main.yml');
+local queryPattern = config.parameters.appuio_reporting_aldebaran.rules.appuio_cloud_compute.query_pattern;
 local query = queryPattern % {
-  node_class: "flex",
-  zone: "c-appuio-cloudscale-lpg-2",
-  cpu_ratio: "4294967296",
-  name: "The Amazing Appuio Cluster",
+  node_class: 'flex',
+  zone: 'c-appuio-cloudscale-lpg-2',
+  cpu_ratio: '4294967296',
+  name: 'The Amazing Appuio Cluster',
 };
 
 local commonLabels = {
@@ -27,7 +26,7 @@ local baseSeries = {
     namespace: 'testproject',
     label_appuio_io_organization: 'cherry-pickers-inc',
   }, '1x120'),
-  testOrgInfo: c.series('appuio_control_organization_info', {"namespace": "appuio-control-api-production", "sales_order": "SO234234", "organization": "cherry-pickers-inc"}, '1x120'),
+  testOrgInfo: c.series('appuio_control_organization_info', { namespace: 'appuio-control-api-production', sales_order: 'SO234234', organization: 'cherry-pickers-inc' }, '1x120'),
   local podLbls = commonLabels {
     namespace: 'testproject',
     pod: 'running-pod',
@@ -201,10 +200,10 @@ local cloudscaleFairUseRatio = 4294967296;
                values: '_x60 1x60',
              },
              testOrgInfoUpdated: self.testOrgInfo {
-                _labels+:: {
-                    organization: 'carrot-pickers-inc',
-                    sales_order: 'SO456456',
-                },
+               _labels+:: {
+                 organization: 'carrot-pickers-inc',
+                 sales_order: 'SO456456',
+               },
              },
            },
            query,
@@ -224,5 +223,29 @@ local cloudscaleFairUseRatio = 4294967296;
              },
            ]),
 
+    c.test('duplicated organization metrics do not throw many-to-many errors - there can an overlap on control-api restarts',
+           baseSeries {
+             testOrgInfo+: {
+               _labels+:: {
+                 pod: 'old-pod',
+                 instance: '192.0.2.16:8080',
+               },
+               values: '2x120',
+             },
+             testOrgInfoUpdated: self.testOrgInfo {
+               _labels+:: {
+                 pod: 'new-pod',
+                 instance: '192.0.2.29:8080',
+               },
+               values: '_x60 1x60',
+             },
+           },
+           query,
+           [
+             {
+               labels: c.formatLabels(baseCalculatedLabels),
+               value: minMemoryRequestMib * 60,
+             },
+           ]),
   ],
 }
