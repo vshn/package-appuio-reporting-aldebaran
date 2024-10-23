@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/projectsyn/commodore-config-package-template.git",
-  "commit": "7e928517906b00a06b9b801656ea5ddca19b26a3",
+  "commit": "25db2ab3baff8e45ba4f68b1e9d3d3ba6b0aa9e2",
   "checkout": "main",
   "context": {
     "cookiecutter": {
@@ -8,6 +8,12 @@
       "slug": "appuio-reporting-aldebaran",
       "test_cases": "defaults",
       "add_golden": "y",
+      "automerge_patch": "y",
+      "automerge_patch_v0": "n",
+      "automerge_patch_regexp_blocklist": "",
+      "automerge_patch_v0_regexp_allowlist": "",
+      "automerge_minor_regexp_allowlist": "",
+      "auto_release": "y",
       "copyright_holder": "VSHN AG <info@vshn.ch>",
       "copyright_year": "2024",
       "github_owner": "vshn",
