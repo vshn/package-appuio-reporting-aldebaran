@@ -1,17 +1,17 @@
-local c = import 'promtest.libsonnet'; // provided by promtest-jsonnet
+local c = import 'promtest.libsonnet';  // provided by promtest-jsonnet
 
-local config = std.extVar("main.yml");
-local queryPattern = config.parameters.appuio_reporting_aldebaran.rules.cilium_addons.query_pattern ;
+local config = std.extVar('main.yml');
+local queryPattern = config.parameters.appuio_reporting_aldebaran.rules.cilium_addons.query_pattern;
 
 local advancedParams = {
-  vshn_service_level: "best_effort",
+  vshn_service_level: 'best_effort',
   cilium_addon: 'advanced',
-  addon_display: "Advanced Networking",
+  addon_display: 'Advanced Networking',
 };
 local tetragonParams = {
-  vshn_service_level: "best_effort",
+  vshn_service_level: 'best_effort',
   cilium_addon: 'tetragon',
-  addon_display: "Tetragon",
+  addon_display: 'Tetragon',
 };
 
 local commonLabels = {
@@ -53,9 +53,44 @@ local baseSeries = {
   appuioInfoLabel: c.series('appuio_managed_info', infoLabels, '1x120'),
 };
 
+local displayNameChange = {
+  appNodeRoleLabel: c.series('kube_node_role', commonLabels {
+    node: 'app-test',
+    role: 'app',
+    cluster_name: 'foo',
+  }, '1x60 _x60') + c.series('kube_node_role', commonLabels {
+    node: 'app-test',
+    role: 'app',
+    cluster_name: 'Foo',
+  }, '_x60 1x60'),
+
+  appNodeCPUInfoLabel0: c.series('node_cpu_info', commonLabels {
+    instance: 'app-test',
+    core: '0',
+    cluster_name: 'foo',
+  }, '1x60 _x60') + c.series('node_cpu_info', commonLabels {
+    instance: 'app-test',
+    core: '0',
+    cluster_name: 'Foo',
+  }, '_x60 1x60'),
+  appNodeCPUInfoLabel1: c.series('node_cpu_info', commonLabels {
+    instance: 'app-test',
+    core: '1',
+    cluster_name: 'foo',
+  }, '1x60 _x60') + c.series('node_cpu_info', commonLabels {
+    instance: 'app-test',
+    core: '1',
+    cluster_name: 'Foo',
+  }, '_x60 1x60'),
+
+  appuioInfoLabel:
+    c.series('appuio_managed_info', infoLabels { cluster_name: 'foo' }, '1x60 _x60') +
+    c.series('appuio_managed_info', infoLabels { cluster_name: 'Foo' }, '_x60 1x60'),
+};
+
 local baseCalculatedLabels = {
-  cluster_id: "c-managed-openshift",
-  sales_order: "SO123123",
+  cluster_id: 'c-managed-openshift',
+  sales_order: 'SO123123',
 };
 
 {
@@ -67,8 +102,22 @@ local baseCalculatedLabels = {
       [
         {
           labels: c.formatLabels(baseCalculatedLabels {
-            cilium_addon: "advanced",
-            addon_display: "Advanced Networking",
+            cilium_addon: 'advanced',
+            addon_display: 'Advanced Networking',
+          }),
+          value: 3,
+        },
+      ]
+    ),
+    c.test(
+      'total CPUs with name change',
+      baseSeries + displayNameChange,
+      queryPattern % advancedParams,
+      [
+        {
+          labels: c.formatLabels(baseCalculatedLabels {
+            cilium_addon: 'advanced',
+            addon_display: 'Advanced Networking',
           }),
           value: 3,
         },
@@ -81,12 +130,12 @@ local baseCalculatedLabels = {
       [
         {
           labels: c.formatLabels(baseCalculatedLabels {
-            cilium_addon: "tetragon",
-            addon_display: "Tetragon",
+            cilium_addon: 'tetragon',
+            addon_display: 'Tetragon',
           }),
           value: 3,
         },
       ]
-    )
+    ),
   ],
 }
