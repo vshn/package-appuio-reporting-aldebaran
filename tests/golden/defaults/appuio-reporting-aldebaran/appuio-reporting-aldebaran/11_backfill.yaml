@@ -506,25 +506,25 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   annotations:
-    product-id: appuiocloud-compute-cloudscalenight
+    product-id: appuiocloud-compute-cloudscaleplus-night
   labels:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: appuiocloud-compute-cloudscalenight-3
-  name: appuiocloud-compute-cloudscalenight-3
+    name: appuiocloud-compute-cloudscaleplus-night-3
+  name: appuiocloud-compute-cloudscaleplus-night-3
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
   jobTemplate:
     metadata:
       annotations:
-        product-id: appuiocloud-compute-cloudscalenight
+        product-id: appuiocloud-compute-cloudscaleplus-night
       labels:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: appuiocloud-compute-cloudscalenight-3
+        cron-job-name: appuiocloud-compute-cloudscaleplus-night-3
     spec:
       template:
         metadata:
@@ -563,7 +563,7 @@ spec:
                       key: url
                       name: prom-url
                 - name: AR_PRODUCT_ID
-                  value: appuiocloud-compute-cloudscalenight
+                  value: appuiocloud-compute-cloudscaleplus-night
                 - name: AR_QUERY
                   value: |
                     label_replace(
