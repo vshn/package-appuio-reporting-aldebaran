@@ -506,25 +506,25 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   annotations:
-    product-id: appuiocloud-compute-cloudscaleplus-night
+    product-id: appuiocloud-compute-cloudscalenokto
   labels:
     app.kubernetes.io/managed-by: commodore
     app.kubernetes.io/name: appuio-reporting
     app.kubernetes.io/part-of: syn
-    name: appuiocloud-compute-cloudscaleplus-night-3
-  name: appuiocloud-compute-cloudscaleplus-night-3
+    name: appuiocloud-compute-cloudscalenokto-3
+  name: appuiocloud-compute-cloudscalenokto-3
   namespace: appuio-reporting-aldebaran
 spec:
   failedJobsHistoryLimit: 768
   jobTemplate:
     metadata:
       annotations:
-        product-id: appuiocloud-compute-cloudscaleplus-night
+        product-id: appuiocloud-compute-cloudscalenokto
       labels:
         app.kubernetes.io/managed-by: commodore
         app.kubernetes.io/name: appuio-reporting
         app.kubernetes.io/part-of: syn
-        cron-job-name: appuiocloud-compute-cloudscaleplus-night-3
+        cron-job-name: appuiocloud-compute-cloudscalenokto-3
     spec:
       template:
         metadata:
@@ -563,7 +563,7 @@ spec:
                       key: url
                       name: prom-url
                 - name: AR_PRODUCT_ID
-                  value: appuiocloud-compute-cloudscaleplus-night
+                  value: appuiocloud-compute-cloudscalenokto
                 - name: AR_QUERY
                   value: |
                     label_replace(
@@ -580,12 +580,12 @@ spec:
                                 # Select used memory if higher.
                                 (
                                   sum by(cluster_id, namespace, label_appuio_io_node_class) (container_memory_working_set_bytes{image!="", cluster_id="c-appuio-cloudscale-lpg-2"}
-                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="night"})))
+                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="nokto"})))
                                   # IMPORTANT: one clause must use equal. If used grater and lesser than, equal values will be dropped.
                                   >=
                                   sum by(cluster_id, namespace, label_appuio_io_node_class) (kube_pod_container_resource_requests{resource="memory", cluster_id="c-appuio-cloudscale-lpg-2"}
                                     * on(uid, cluster_id, pod, namespace) group_left kube_pod_status_phase{phase="Running"}
-                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="night"})))
+                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="nokto"})))
                                 )
                                 or
                                 # Select reserved memory if higher.
@@ -593,10 +593,10 @@ spec:
                                   # IMPORTANT: The desired time series must always be first.
                                   sum by(cluster_id, namespace, label_appuio_io_node_class) (kube_pod_container_resource_requests{resource="memory", cluster_id="c-appuio-cloudscale-lpg-2"}
                                     * on(uid, cluster_id, pod, namespace) group_left kube_pod_status_phase{phase="Running"}
-                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="night"})))
+                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="nokto"})))
                                   >
                                   sum by(cluster_id, namespace, label_appuio_io_node_class) (container_memory_working_set_bytes{image!="", cluster_id="c-appuio-cloudscale-lpg-2"}
-                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="night"})))
+                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="nokto"})))
                                 )
                               )
                               # Add CPU requests in violation to the ratio provided by the platform.
@@ -604,14 +604,14 @@ spec:
                                 # Convert CPU request to their memory equivalent.
                                 sum by(cluster_id, namespace, label_appuio_io_node_class) (
                                   kube_pod_container_resource_requests{resource="cpu", cluster_id="c-appuio-cloudscale-lpg-2"} * on(uid, cluster_id, pod, namespace) group_left kube_pod_status_phase{phase="Running"}
-                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="night"}))
+                                    * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="nokto"}))
                                   # CPU ratio depending on cluster
                                   * 4294967296
                                 )
                                 # Subtract memory request
                                 - sum by(cluster_id, namespace, label_appuio_io_node_class) (kube_pod_container_resource_requests{resource="memory", cluster_id="c-appuio-cloudscale-lpg-2"}
                                   * on(uid, cluster_id, pod, namespace) group_left kube_pod_status_phase{phase="Running"}
-                                  * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="night"})))
+                                  * on(cluster_id, node) group_left(label_appuio_io_node_class) (min by(cluster_id, node, label_appuio_io_node_class) (kube_node_labels{label_appuio_io_node_class="nokto"})))
                               # Only values above zero are in violation.
                               , 0)
                             )

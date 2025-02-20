@@ -781,9 +781,9 @@ parameters:
               zone: c-appuio-exoscale-ch-gva-2-0
               cpu_ratio: "5333057536" # 5086 MiB / core
               name: ${appuio_reporting_aldebaran:cluster_id_to_name_map:c-appuio-exoscale-ch-gva-2-0}
-          - product_id: appuiocloud-compute-cloudscaleplus-night
+          - product_id: appuiocloud-compute-cloudscalenokto
             params:
-              node_class: night
+              node_class: nokto
               zone: c-appuio-cloudscale-lpg-2
               cpu_ratio: "4294967296" # 4096 MiB / core
               name: ${appuio_reporting_aldebaran:cluster_id_to_name_map:c-appuio-cloudscale-lpg-2}
