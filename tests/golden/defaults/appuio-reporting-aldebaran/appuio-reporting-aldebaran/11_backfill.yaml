@@ -1849,7 +1849,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -1960,7 +1960,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2071,7 +2071,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2182,7 +2182,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2293,7 +2293,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2404,7 +2404,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2515,7 +2515,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2626,7 +2626,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2737,7 +2737,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2848,7 +2848,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -2959,7 +2959,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3070,7 +3070,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3181,7 +3181,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3292,7 +3292,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3403,7 +3403,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3514,7 +3514,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3625,7 +3625,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3736,7 +3736,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="storage"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="storage",role!~""}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3847,7 +3847,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -3958,7 +3958,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4069,7 +4069,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4180,7 +4180,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4291,7 +4291,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4402,7 +4402,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4513,7 +4513,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4624,7 +4624,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4735,7 +4735,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4846,7 +4846,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -4957,7 +4957,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5068,7 +5068,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5179,7 +5179,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5290,7 +5290,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5401,7 +5401,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5512,7 +5512,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5623,7 +5623,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5734,7 +5734,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5845,7 +5845,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -5956,7 +5956,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6067,7 +6067,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6178,7 +6178,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6289,7 +6289,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6400,7 +6400,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6511,7 +6511,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6622,7 +6622,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6733,7 +6733,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6844,7 +6844,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -6955,7 +6955,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -7066,7 +7066,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -7177,7 +7177,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -7288,7 +7288,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -7399,7 +7399,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -7510,7 +7510,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -7621,7 +7621,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
@@ -7732,7 +7732,7 @@ spec:
                           * on (cluster_id, instance) group_left(role) (
                               # node_cpu_info and kube_node_role use different labels to identify the node.
                               max by (role, instance, cluster_id) (
-                                  label_join(kube_node_role{role="app"}, "instance", "", "node")
+                                  label_join(kube_node_role{role="worker",role!~"infra|storage"}, "instance", "", "node")
                               )
                           )
                       )[59m:1m]
