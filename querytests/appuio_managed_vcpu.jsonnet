@@ -7,14 +7,17 @@ local appParams = {
   cloud_provider: 'cloudscale',
   vshn_service_level: 'best_effort',
   distribution: 'openshift4',
-  role: 'app',
+  role: 'worker',
+  not_role: 'infra|storage',
   flavor_display: 'OpenShift Container Platform',
 };
+
 local storageParams = {
   cloud_provider: 'cloudscale',
   vshn_service_level: 'best_effort',
   distribution: 'openshift4',
   role: 'storage',
+  not_role: '',
   flavor_display: 'OpenShift Container Platform',
 };
 
@@ -53,6 +56,33 @@ local baseSeries = {
   storageNodeCPUInfoLabel0: c.series('node_cpu_info', commonLabels {
     instance: 'storage-test',
     core: '0',
+  }, '1x120'),
+
+  infraNodeRoleLabel: c.series('kube_node_role', commonLabels {
+    node: 'infra-test',
+    role: 'infra',
+  }, '1x120'),
+
+  infraNodeCPUInfoLabel0: c.series('node_cpu_info', commonLabels {
+    instance: 'infra-test',
+    core: '0',
+  }, '1x120'),
+  infraNodeCPUInfoLabel1: c.series('node_cpu_info', commonLabels {
+    instance: 'infra-test',
+    core: '1',
+  }, '1x120'),
+
+  workerNodeRoleLabel0: c.series('kube_node_role', commonLabels {
+    node: 'app-test',
+    role: 'worker',
+  }, '1x120'),
+  workerNodeRoleLabel1: c.series('kube_node_role', commonLabels {
+    node: 'storage-test',
+    role: 'worker',
+  }, '1x120'),
+  workerNodeRoleLabel2: c.series('kube_node_role', commonLabels {
+    node: 'infra-test',
+    role: 'worker',
   }, '1x120'),
 
   appuioInfoLabel: c.series('appuio_managed_info', infoLabels, '1x120'),
@@ -136,6 +166,19 @@ local baseCalculatedLabels = {
             role: 'app',
           }),
           value: 2,
+        },
+      ]
+    ),
+    c.test(
+      'and if we include the infra and storage nodes, there should be 5 CPUs',
+      baseSeries,
+      queryPattern % appParams { not_role: "" },
+      [
+        {
+          labels: c.formatLabels(baseCalculatedLabels {
+            role: 'app',
+          }),
+          value: 5,
         },
       ]
     ),
