@@ -1143,7 +1143,17 @@ parameters:
                 * on (cluster_id, instance) group_left(role) (
                     # node_cpu_info and kube_node_role use different labels to identify the node.
                     max by (cluster_id, instance, role) (
-                        label_join(kube_node_role{role=~"app|storage"}, "instance", "", "node")
+                      label_join(
+                        kube_node_role{role=~"app|storage"}
+                        # Limit to clusters that we need to bill
+                        * on(cluster_id) group_left () max by (cluster_id) (
+                          appuio_managed_info{
+                            vshn_service_level=~"%(vshn_service_level)s",
+                            cilium_addons=~".*%(cilium_addon)s.*"
+                          }
+                        )
+                        , "instance", "", "node"
+                      )
                     )
                 )
             )[59m:1m]
