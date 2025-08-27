@@ -311,6 +311,22 @@ parameters:
               distribution: openshift4
               flavor_display: Container Platform
               vshn_service_level: zero
+          - product_id: openshiftoke-exoscale-workervcpu-besteffort
+            params:
+              cloud_provider: exoscale
+              role: worker
+              not_role: infra|storage
+              distribution: oke
+              flavor_display: Kubernetes Engine
+              vshn_service_level: best_effort
+          - product_id: openshiftoke-exoscale-workervcpu-guaranteed
+            params:
+              cloud_provider: exoscale
+              role: worker
+              not_role: infra|storage
+              distribution: oke
+              flavor_display: Kubernetes Engine
+              vshn_service_level: guaranteed_availability
           - product_id: 'openshift-openstackcsp-workervcpu-besteffort'
             params:
               cloud_provider: openstackcsp
